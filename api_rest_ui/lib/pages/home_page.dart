@@ -23,53 +23,55 @@ class _HomePageState extends State<HomePage> {
         onTap: () {
           FocusScope.of(context).unfocus();
         },
-        child: Container(
-          width: double.infinity,
-          height: double.infinity,
-          color: Colors.white,
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Positioned(
-                top: -pinkSize * .4,
-                right: -pinkSize * .2,
-                child: Circle(
-                  size: pinkSize,
-                  colors: [
-                    Colors.pinkAccent,
-                    Colors.pink,
-                  ],
+        child: SingleChildScrollView(
+          child: Container(
+            width: double.infinity,
+            height: responsive.height,
+            color: Colors.white,
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Positioned(
+                  top: -pinkSize * .4,
+                  right: -pinkSize * .2,
+                  child: Circle(
+                    size: pinkSize,
+                    colors: [
+                      Colors.pinkAccent,
+                      Colors.pink,
+                    ],
+                  ),
                 ),
-              ),
-              Positioned(
-                top: -orangeSize * .55,
-                left: -orangeSize * .15,
-                child: Circle(
-                  size: orangeSize,
-                  colors: [
-                    Colors.orange,
-                    Colors.deepOrangeAccent,
-                  ],
+                Positioned(
+                  top: -orangeSize * .55,
+                  left: -orangeSize * .15,
+                  child: Circle(
+                    size: orangeSize,
+                    colors: [
+                      Colors.orange,
+                      Colors.deepOrangeAccent,
+                    ],
+                  ),
                 ),
-              ),
-              Positioned(
-                top: pinkSize * 0.37,
-                child: Column(
-                  children: [
-                    IconContainer(size: responsive.wp(17)),
-                    SizedBox(
-                      height: responsive.hp(3),
-                    ),
-                    Text(
-                      "Hola\nBienvenido!",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: responsive.dp(2)),
-                    )
-                  ],
+                Positioned(
+                  top: pinkSize * 0.37,
+                  child: Column(
+                    children: [
+                      IconContainer(size: responsive.wp(17)),
+                      SizedBox(
+                        height: responsive.hp(3),
+                      ),
+                      Text(
+                        "Hola\nBienvenido!",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(fontSize: responsive.dp(2)),
+                      )
+                    ],
+                  ),
                 ),
-              ),
-              LoginForm()
-            ],
+                LoginForm()
+              ],
+            ),
           ),
         ),
       ),

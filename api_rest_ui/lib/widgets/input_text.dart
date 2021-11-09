@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 class InputText extends StatelessWidget {
   final String label;
   final TextInputType keyboardType;
-  final bool obsucreText;
+  final bool obsucreText, borderEnabled;
   const InputText({
     Key key,
     this.label = "",
     this.keyboardType = TextInputType.text,
     this.obsucreText = false,
+    this.borderEnabled = true,
   }) : super(key: key);
 
   @override
@@ -17,6 +18,12 @@ class InputText extends StatelessWidget {
       keyboardType: this.keyboardType,
       obscureText: this.obsucreText,
       decoration: InputDecoration(
+        enabledBorder: this.borderEnabled
+            ? UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.black12),
+              )
+            : InputBorder.none,
+        contentPadding: EdgeInsets.symmetric(vertical: 10),
         labelText: this.label,
         labelStyle: TextStyle(
           color: Colors.black26,
