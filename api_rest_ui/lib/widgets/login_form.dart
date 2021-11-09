@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:api_rest_ui/utils/responsive.dart';
 import 'package:api_rest_ui/widgets/input_text.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ class LoginForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Responsive responsive = Responsive.of(context);
     return Positioned(
       bottom: 30,
       right: 20,
@@ -17,6 +19,7 @@ class LoginForm extends StatelessWidget {
           InputText(
             keyboardType: TextInputType.emailAddress,
             label: "CORREO ELECTRONICO",
+            fontSize: responsive.dp(1.5),
           ),
           Container(
             decoration: BoxDecoration(
@@ -33,6 +36,7 @@ class LoginForm extends StatelessWidget {
                     label: "CONTRASEÑA",
                     obsucreText: true,
                     borderEnabled: false,
+                    fontSize: responsive.dp(1.5),
                   ),
                 ),
                 FlatButton(
@@ -40,12 +44,54 @@ class LoginForm extends StatelessWidget {
                   onPressed: () {},
                   child: Text(
                     "Olvido Contraseña",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: responsive.dp(1.5)),
                   ),
                 )
               ],
             ),
-          )
+          ),
+          SizedBox(
+            height: responsive.dp(5),
+          ),
+          SizedBox(
+            width: double.infinity,
+            child: FlatButton(
+              padding: EdgeInsets.symmetric(vertical: 15),
+              color: Colors.pinkAccent,
+              onPressed: () {},
+              child: Text(
+                "Iniciar Sesion",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+          ),
+          SizedBox(
+            height: responsive.dp(2),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "¿No tienes cuenta?",
+                style: TextStyle(fontSize: responsive.dp(1.5)),
+              ),
+              FlatButton(
+                onPressed: () {},
+                child: Text(
+                  "Registrarme",
+                  style: TextStyle(
+                    color: Colors.pinkAccent,
+                    fontSize: responsive.dp(1.5),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: responsive.dp(14),
+          ),
         ],
       ),
     );
