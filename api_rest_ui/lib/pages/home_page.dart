@@ -46,8 +46,8 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             Positioned(
-              top: 130,
-              child: IconContainer(),
+              top: pinkSize * 0.37,
+              child: IconContainer(size: size.width * 0.17),
             )
           ],
         ),
