@@ -5,20 +5,26 @@ class InputText extends StatelessWidget {
   final TextInputType keyboardType;
   final bool obsucreText, borderEnabled;
   final double fontSize;
-  const InputText(
-      {Key key,
-      this.label = "",
-      this.keyboardType = TextInputType.text,
-      this.obsucreText = false,
-      this.borderEnabled = true,
-      this.fontSize = 15})
-      : super(key: key);
+  final void Function(String data) onChanged;
+  final String Function(String text) validator;
+  const InputText({
+    Key key,
+    this.label = "",
+    this.keyboardType = TextInputType.text,
+    this.obsucreText = false,
+    this.borderEnabled = true,
+    this.fontSize = 15,
+    this.onChanged,
+    this.validator,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
       keyboardType: this.keyboardType,
       obscureText: this.obsucreText,
+      onChanged: this.onChanged,
+      validator: this.validator,
       style: TextStyle(fontSize: this.fontSize),
       decoration: InputDecoration(
         enabledBorder: this.borderEnabled
