@@ -1,4 +1,5 @@
 import 'package:api_rest_ui/widgets/circle.dart';
+import 'package:api_rest_ui/widgets/icon_container.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,6 +21,7 @@ class _HomePageState extends State<HomePage> {
         height: double.infinity,
         color: Colors.white,
         child: Stack(
+          alignment: Alignment.center,
           children: [
             Positioned(
               top: -pinkSize * .4,
@@ -43,6 +45,10 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            Positioned(
+              top: 130,
+              child: IconContainer(),
+            )
           ],
         ),
       ),
