@@ -3,10 +3,11 @@ import 'dart:math' as math;
 
 class Responsive {
   double _widht, _height, _diagonal;
-
+  bool _isTablet;
   double get width => _widht;
   double get height => _height;
   double get diagonal => _diagonal;
+  bool get isTablet => _isTablet;
 
   static Responsive of(BuildContext context) => Responsive(context);
 
@@ -17,6 +18,8 @@ class Responsive {
 
     // c2=a2+b2 diagonal
     this._diagonal = math.sqrt(math.pow(_widht, 2) + math.pow(_height, 2));
+
+    this._isTablet = size.shortestSide >= 600;
   }
 
   double wp(double percent) => _widht * percent / 100;
