@@ -1,3 +1,4 @@
+import 'package:api_rest_ui/utils/responsive.dart';
 import 'package:api_rest_ui/widgets/circle.dart';
 import 'package:api_rest_ui/widgets/icon_container.dart';
 import 'package:flutter/material.dart';
@@ -12,9 +13,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-    final double pinkSize = size.width * 0.8;
-    final double orangeSize = size.width * 0.57;
+    // clase responsive
+    final Responsive responsive = Responsive.of(context);
+    final double pinkSize = responsive.wp(80);
+    final double orangeSize = responsive.wp(57);
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -47,7 +49,19 @@ class _HomePageState extends State<HomePage> {
             ),
             Positioned(
               top: pinkSize * 0.37,
-              child: IconContainer(size: size.width * 0.17),
+              child: Column(
+                children: [
+                  IconContainer(size: responsive.wp(17)),
+                  SizedBox(
+                    height: responsive.hp(3),
+                  ),
+                  Text(
+                    "Hola\nBienvenido!",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: responsive.dp(2)),
+                  )
+                ],
+              ),
             )
           ],
         ),
