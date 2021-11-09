@@ -1,6 +1,7 @@
 import 'package:api_rest_ui/utils/responsive.dart';
 import 'package:api_rest_ui/widgets/circle.dart';
 import 'package:api_rest_ui/widgets/icon_container.dart';
+import 'package:api_rest_ui/widgets/login_form.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,52 +19,58 @@ class _HomePageState extends State<HomePage> {
     final double pinkSize = responsive.wp(80);
     final double orangeSize = responsive.wp(57);
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        color: Colors.white,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Positioned(
-              top: -pinkSize * .4,
-              right: -pinkSize * .2,
-              child: Circle(
-                size: pinkSize,
-                colors: [
-                  Colors.pinkAccent,
-                  Colors.pink,
-                ],
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Container(
+          width: double.infinity,
+          height: double.infinity,
+          color: Colors.white,
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Positioned(
+                top: -pinkSize * .4,
+                right: -pinkSize * .2,
+                child: Circle(
+                  size: pinkSize,
+                  colors: [
+                    Colors.pinkAccent,
+                    Colors.pink,
+                  ],
+                ),
               ),
-            ),
-            Positioned(
-              top: -orangeSize * .55,
-              left: -orangeSize * .15,
-              child: Circle(
-                size: orangeSize,
-                colors: [
-                  Colors.orange,
-                  Colors.deepOrangeAccent,
-                ],
+              Positioned(
+                top: -orangeSize * .55,
+                left: -orangeSize * .15,
+                child: Circle(
+                  size: orangeSize,
+                  colors: [
+                    Colors.orange,
+                    Colors.deepOrangeAccent,
+                  ],
+                ),
               ),
-            ),
-            Positioned(
-              top: pinkSize * 0.37,
-              child: Column(
-                children: [
-                  IconContainer(size: responsive.wp(17)),
-                  SizedBox(
-                    height: responsive.hp(3),
-                  ),
-                  Text(
-                    "Hola\nBienvenido!",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: responsive.dp(2)),
-                  )
-                ],
+              Positioned(
+                top: pinkSize * 0.37,
+                child: Column(
+                  children: [
+                    IconContainer(size: responsive.wp(17)),
+                    SizedBox(
+                      height: responsive.hp(3),
+                    ),
+                    Text(
+                      "Hola\nBienvenido!",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: responsive.dp(2)),
+                    )
+                  ],
+                ),
               ),
-            )
-          ],
+              LoginForm()
+            ],
+          ),
         ),
       ),
     );
