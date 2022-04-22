@@ -27,7 +27,7 @@ class _LoginFormState extends State<LoginForm> {
       bottom: 30,
       child: Container(
         constraints: BoxConstraints(
-          maxWidth: responsive.isTablet ? 4300 : 360,
+          maxWidth: responsive.isTablet ? 430 : 360,
         ),
         child: Form(
           key: _formKey,
