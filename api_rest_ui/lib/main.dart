@@ -1,4 +1,5 @@
-import 'package:api_rest_ui/pages/home_page.dart';
+import 'package:api_rest_ui/pages/login_page.dart';
+import 'package:api_rest_ui/pages/registro_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -18,7 +19,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      home: LoginPage(),
+      routes: {
+        RegisterPage.routeName: (_) => RegisterPage(),
+        LoginPage.routeName: (_) => LoginPage(),
+      },
       debugShowCheckedModeBanner: false,
     );
   }

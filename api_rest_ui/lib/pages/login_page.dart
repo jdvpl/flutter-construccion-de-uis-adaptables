@@ -4,14 +4,15 @@ import 'package:api_rest_ui/widgets/icon_container.dart';
 import 'package:api_rest_ui/widgets/login_form.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatefulWidget {
-  HomePage({Key key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  static const routeName = "login";
+  LoginPage({Key key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     // clase responsive

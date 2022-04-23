@@ -36,7 +36,7 @@ class _LoginFormState extends State<LoginForm> {
               InputText(
                 keyboardType: TextInputType.emailAddress,
                 label: "CORREO ELECTRONICO",
-                fontSize: responsive.dp(responsive.isTablet ? 1.2 : 1.5),
+                fontSize: responsive.dp(responsive.isTablet ? 1.2 : 1.4),
                 onChanged: (text) {
                   _email = text;
                 },
@@ -120,7 +120,9 @@ class _LoginFormState extends State<LoginForm> {
                     style: TextStyle(fontSize: responsive.dp(1.5)),
                   ),
                   FlatButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.pushNamed(context, 'register');
+                    },
                     child: Text(
                       "Registrarme",
                       style: TextStyle(
