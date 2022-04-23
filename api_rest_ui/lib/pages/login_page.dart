@@ -63,7 +63,7 @@ class _LoginPageState extends State<LoginPage> {
                         height: responsive.hp(3),
                       ),
                       Text(
-                        "Hola\nBienvenido!",
+                        "Hello again\nWelcome Back!",
                         textAlign: TextAlign.center,
                         style: TextStyle(fontSize: responsive.dp(2)),
                       )

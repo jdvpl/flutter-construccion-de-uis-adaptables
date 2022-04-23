@@ -1,6 +1,7 @@
 import 'package:api_rest_ui/utils/responsive.dart';
 import 'package:api_rest_ui/widgets/avatar_button.dart';
 import 'package:api_rest_ui/widgets/circle.dart';
+import 'package:api_rest_ui/widgets/register_form.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -59,7 +60,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Column(
                     children: [
                       Text(
-                        "Hello\nSign Up to get stated!",
+                        "Hello\nSign up to get stated!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: responsive.dp(1.6), color: Colors.white),
@@ -71,7 +72,6 @@ class _RegisterPageState extends State<RegisterPage> {
                     ],
                   ),
                 ),
-
                 Positioned(
                     left: 15,
                     top: 15,
@@ -81,10 +81,12 @@ class _RegisterPageState extends State<RegisterPage> {
                         padding: EdgeInsets.all(10),
                         borderRadius: BorderRadius.circular(50),
                         child: Icon(Icons.arrow_back),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
                       ),
-                    ))
-                // LoginForm()
+                    )),
+                RegisterForm()
               ],
             ),
           ),
