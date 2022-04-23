@@ -1,6 +1,6 @@
 import 'package:api_rest_ui/utils/responsive.dart';
+import 'package:api_rest_ui/widgets/avatar_button.dart';
 import 'package:api_rest_ui/widgets/circle.dart';
-import 'package:api_rest_ui/widgets/icon_container.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -64,13 +64,9 @@ class _RegisterPageState extends State<RegisterPage> {
                         style: TextStyle(
                             fontSize: responsive.dp(1.6), color: Colors.white),
                       ),
-                      SizedBox(height: responsive.hp(5)),
-                      ClipOval(
-                        child: Image.network(
-                          'https://www.w3schools.com/howto/img_avatar.png',
-                          width: responsive.wp(28),
-                          height: responsive.wp(28),
-                        ),
+                      SizedBox(height: responsive.hp(3.5)),
+                      AvatarButton(
+                        imageSize: responsive.wp(25),
                       )
                     ],
                   ),
