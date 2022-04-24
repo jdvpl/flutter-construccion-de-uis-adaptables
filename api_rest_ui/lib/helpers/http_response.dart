@@ -1,13 +1,13 @@
 import 'package:meta/meta.dart' show required;
 
-class HttpResponse {
-  final dynamic data;
+class HttpResponse<T> {
+  final T data;
   final HttpError error;
 
   HttpResponse(this.data, this.error);
 
-  static HttpResponse succes(dynamic data) => HttpResponse(data, null);
-  static HttpResponse fail({
+  static HttpResponse<T> succes<T>(T data) => HttpResponse(data, null);
+  static HttpResponse<T> fail<T>({
     @required int statusCode,
     @required String message,
     @required dynamic data,

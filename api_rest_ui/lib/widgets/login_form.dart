@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:api_rest_ui/api/authentication_api.dart';
+import 'package:api_rest_ui/pages/home_page.dart';
 import 'package:api_rest_ui/utils/dialogs.dart';
 import 'package:api_rest_ui/utils/responsive.dart';
 import 'package:api_rest_ui/widgets/input_text.dart';
@@ -14,16 +15,16 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
+  final authenticationAPI = GetIt.instance<AuthenticationAPI>();
   GlobalKey<FormState> _formKey = GlobalKey();
   String _email = "", _password = "";
 
   Future<void> _submit() async {
     bool isOk = _formKey.currentState.validate();
-    _email = _email.trim();
-    _password = _password.trim();
+
     if (isOk) {
       ProgressDialog.show(context);
-      final authenticationAPI = GetIt.instance<AuthenticationAPI>();
+
       final response = await authenticationAPI.login(
         email: _email,
         password: _password,
@@ -32,7 +33,8 @@ class _LoginFormState extends State<LoginForm> {
 
       if (response.data != null) {
         print("Register ok ${response.data}");
-        Navigator.pushNamedAndRemoveUntil(context, 'home', (_) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, HomePage.routeName, (_) => false);
       } else {
         print("Register code ${response.error.statusCode}");
         print("Register data ${response.error.data}");
