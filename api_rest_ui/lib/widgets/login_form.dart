@@ -1,5 +1,6 @@
 import 'dart:ui';
-
+import 'package:api_rest_ui/api/authentication_api.dart';
+import 'package:api_rest_ui/utils/dialogs.dart';
 import 'package:api_rest_ui/utils/responsive.dart';
 import 'package:api_rest_ui/widgets/input_text.dart';
 import 'package:flutter/material.dart';
@@ -13,11 +14,38 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   GlobalKey<FormState> _formKey = GlobalKey();
+  AuthenticationAPI _authenticationAPI = AuthenticationAPI();
   String _email = "", _password = "";
 
-  _submit() {
+  Future<void> _submit() async {
     bool isOk = _formKey.currentState.validate();
-    print("formulario $isOk");
+    if (isOk) {
+      ProgressDialog.show(context);
+      final response = await _authenticationAPI.login(
+        email: _email,
+        password: _password,
+      );
+      ProgressDialog.dismiss(context);
+
+      if (response.data != null) {
+        print("Register ok ${response.data}");
+        Navigator.pushNamedAndRemoveUntil(context, 'home', (_) => false);
+      } else {
+        print("Register code ${response.error.statusCode}");
+        print("Register data ${response.error.data}");
+        print("Register message ${response.error.message}");
+
+        String message = response.error.message;
+        if (response.error.statusCode == -1) {
+          message = "Network conection fail";
+        } else if (response.error.statusCode == 403) {
+          message = "Invalid password";
+        } else if (response.error.statusCode == 404) {
+          message = "User not found";
+        }
+        Dialogs.alert(context, title: "Error", message: message);
+      }
+    }
   }
 
   @override
