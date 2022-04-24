@@ -4,6 +4,7 @@ import 'package:api_rest_ui/utils/dialogs.dart';
 import 'package:api_rest_ui/utils/responsive.dart';
 import 'package:api_rest_ui/widgets/input_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class LoginForm extends StatefulWidget {
   const LoginForm({Key key}) : super(key: key);
@@ -14,14 +15,16 @@ class LoginForm extends StatefulWidget {
 
 class _LoginFormState extends State<LoginForm> {
   GlobalKey<FormState> _formKey = GlobalKey();
-  AuthenticationAPI _authenticationAPI = AuthenticationAPI();
   String _email = "", _password = "";
 
   Future<void> _submit() async {
     bool isOk = _formKey.currentState.validate();
+    _email = _email.trim();
+    _password = _password.trim();
     if (isOk) {
       ProgressDialog.show(context);
-      final response = await _authenticationAPI.login(
+      final authenticationAPI = GetIt.instance<AuthenticationAPI>();
+      final response = await authenticationAPI.login(
         email: _email,
         password: _password,
       );

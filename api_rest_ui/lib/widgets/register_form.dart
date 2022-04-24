@@ -6,6 +6,7 @@ import 'package:api_rest_ui/utils/dialogs.dart';
 import 'package:api_rest_ui/utils/responsive.dart';
 import 'package:api_rest_ui/widgets/input_text.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key key}) : super(key: key);
@@ -16,7 +17,6 @@ class RegisterForm extends StatefulWidget {
 
 class _RegisterFormState extends State<RegisterForm> {
   GlobalKey<FormState> _formKey = GlobalKey();
-  final AuthenticationAPI _authenticationAPI = AuthenticationAPI();
 
   String _username = "", _email = "", _password = "";
 
@@ -24,7 +24,8 @@ class _RegisterFormState extends State<RegisterForm> {
     bool isOk = _formKey.currentState.validate();
     if (isOk) {
       ProgressDialog.show(context);
-      final response = await _authenticationAPI.register(
+      final authenticationAPI = GetIt.instance<AuthenticationAPI>();
+      final response = await authenticationAPI.register(
         username: _username,
         email: _email,
         password: _password,

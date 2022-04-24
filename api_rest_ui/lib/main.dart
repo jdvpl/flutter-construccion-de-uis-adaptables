@@ -1,3 +1,4 @@
+import 'package:api_rest_ui/helpers/dependency_injection.dart';
 import 'package:api_rest_ui/pages/home_page.dart';
 import 'package:api_rest_ui/pages/login_page.dart';
 import 'package:api_rest_ui/pages/registro_page.dart';
@@ -5,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 void main() {
+  DependencyInjection.initialize();
   runApp(MyApp());
 }
 
