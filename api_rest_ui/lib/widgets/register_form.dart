@@ -23,12 +23,20 @@ class _RegisterFormState extends State<RegisterForm> {
     bool isOk = _formKey.currentState.validate();
     if (isOk) {
       ProgressDialog.show(context);
-      await _authenticationAPI.register(
+      final response = await _authenticationAPI.register(
         username: _username,
         email: _email,
         password: _password,
       );
       ProgressDialog.dismiss(context);
+
+      if (response.data != null) {
+        print("Register ok ${response.data}");
+      } else {
+        print("Register code ${response.error.statusCode}");
+        print("Register data ${response.error.data}");
+        print("Register message ${response.error.message}");
+      }
     }
   }
 
