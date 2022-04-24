@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:api_rest_ui/api/authentication_api.dart';
+import 'package:api_rest_ui/utils/dialogs.dart';
 import 'package:api_rest_ui/utils/responsive.dart';
 import 'package:api_rest_ui/widgets/input_text.dart';
 import 'package:flutter/material.dart';
@@ -18,14 +19,16 @@ class _RegisterFormState extends State<RegisterForm> {
 
   String _username = "", _email = "", _password = "";
 
-  _submit() {
+  Future<void> _submit() async {
     bool isOk = _formKey.currentState.validate();
     if (isOk) {
-      _authenticationAPI.register(
+      ProgressDialog.show(context);
+      await _authenticationAPI.register(
         username: _username,
         email: _email,
         password: _password,
       );
+      ProgressDialog.dismiss(context);
     }
   }
 
