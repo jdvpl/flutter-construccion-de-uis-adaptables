@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:api_rest_ui/api/authentication_api.dart';
+import 'package:api_rest_ui/data/authentication_client.dart';
 import 'package:api_rest_ui/pages/home_page.dart';
 import 'package:api_rest_ui/utils/dialogs.dart';
 import 'package:api_rest_ui/utils/responsive.dart';
@@ -15,7 +16,9 @@ class LoginForm extends StatefulWidget {
 }
 
 class _LoginFormState extends State<LoginForm> {
-  final authenticationAPI = GetIt.instance<AuthenticationAPI>();
+  final _authenticationAPI = GetIt.instance<AuthenticationAPI>();
+  final _authenticationClient = GetIt.instance<AuthenticationClient>();
+
   GlobalKey<FormState> _formKey = GlobalKey();
   String _email = "", _password = "";
 
@@ -25,21 +28,17 @@ class _LoginFormState extends State<LoginForm> {
     if (isOk) {
       ProgressDialog.show(context);
 
-      final response = await authenticationAPI.login(
+      final response = await _authenticationAPI.login(
         email: _email,
         password: _password,
       );
       ProgressDialog.dismiss(context);
 
       if (response.data != null) {
-        print("Register ok ${response.data}");
+        await _authenticationClient.saveSession(response.data);
         Navigator.pushNamedAndRemoveUntil(
             context, HomePage.routeName, (_) => false);
       } else {
-        print("Register code ${response.error.statusCode}");
-        print("Register data ${response.error.data}");
-        print("Register message ${response.error.message}");
-
         String message = response.error.message;
         if (response.error.statusCode == -1) {
           message = "Network conection fail";

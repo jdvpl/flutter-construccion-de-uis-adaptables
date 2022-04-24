@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:api_rest_ui/api/authentication_api.dart';
+import 'package:api_rest_ui/data/authentication_client.dart';
 import 'package:api_rest_ui/utils/dialogs.dart';
 import 'package:api_rest_ui/utils/responsive.dart';
 import 'package:api_rest_ui/widgets/input_text.dart';
@@ -16,6 +17,9 @@ class RegisterForm extends StatefulWidget {
 }
 
 class _RegisterFormState extends State<RegisterForm> {
+  final _authenticationClient = GetIt.instance<AuthenticationClient>();
+  final _authenticationAPI = GetIt.instance<AuthenticationAPI>();
+
   GlobalKey<FormState> _formKey = GlobalKey();
 
   String _username = "", _email = "", _password = "";
@@ -24,8 +28,7 @@ class _RegisterFormState extends State<RegisterForm> {
     bool isOk = _formKey.currentState.validate();
     if (isOk) {
       ProgressDialog.show(context);
-      final authenticationAPI = GetIt.instance<AuthenticationAPI>();
-      final response = await authenticationAPI.register(
+      final response = await _authenticationAPI.register(
         username: _username,
         email: _email,
         password: _password,
@@ -33,7 +36,7 @@ class _RegisterFormState extends State<RegisterForm> {
       ProgressDialog.dismiss(context);
 
       if (response.data != null) {
-        print("Register ok ${response.data}");
+        await _authenticationClient.saveSession(response.data);
         Navigator.pushNamedAndRemoveUntil(context, 'home', (_) => false);
       } else {
         print("Register code ${response.error.statusCode}");
