@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:ui';
 
 import 'package:api_rest_ui/api/authentication_api.dart';
@@ -32,10 +33,20 @@ class _RegisterFormState extends State<RegisterForm> {
 
       if (response.data != null) {
         print("Register ok ${response.data}");
+        Navigator.pushNamedAndRemoveUntil(context, 'home', (_) => false);
       } else {
         print("Register code ${response.error.statusCode}");
         print("Register data ${response.error.data}");
         print("Register message ${response.error.message}");
+
+        String message = response.error.message;
+        if (response.error.statusCode == -1) {
+          message = "Network conection fail";
+        } else if (response.error.statusCode == 409) {
+          message =
+              "Duplicated user ${jsonEncode(response.error.data['duplicatedFields'])}";
+        }
+        Dialogs.alert(context, title: "Error", message: message);
       }
     }
   }
