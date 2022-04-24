@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:api_rest_ui/api/authentication_api.dart';
 import 'package:api_rest_ui/utils/responsive.dart';
 import 'package:api_rest_ui/widgets/input_text.dart';
 import 'package:flutter/material.dart';
@@ -13,11 +14,19 @@ class RegisterForm extends StatefulWidget {
 
 class _RegisterFormState extends State<RegisterForm> {
   GlobalKey<FormState> _formKey = GlobalKey();
+  final AuthenticationAPI _authenticationAPI = AuthenticationAPI();
+
   String _username = "", _email = "", _password = "";
 
   _submit() {
     bool isOk = _formKey.currentState.validate();
-    print("formulario $isOk");
+    if (isOk) {
+      _authenticationAPI.register(
+        username: _username,
+        email: _email,
+        password: _password,
+      );
+    }
   }
 
   @override
