@@ -1,3 +1,4 @@
+import 'package:api_rest_ui/api/account_api.dart';
 import 'package:api_rest_ui/api/authentication_api.dart';
 import 'package:api_rest_ui/data/authentication_client.dart';
 import 'package:api_rest_ui/helpers/http.dart';
@@ -16,9 +17,11 @@ abstract class DependencyInjection {
     final secureStorage = FlutterSecureStorage();
     final authenticationAPI = AuthenticationAPI(http);
     final authenticationClient = AuthenticationClient(secureStorage);
-    // registro de las dependencies
+    final accountAPI =
+        AccountAPI(http, authenticationClient); // registro de las dependencies
     GetIt.instance.registerSingleton<AuthenticationAPI>(authenticationAPI);
     GetIt.instance
         .registerSingleton<AuthenticationClient>(authenticationClient);
+    GetIt.instance.registerSingleton<AccountAPI>(accountAPI);
   }
 }
